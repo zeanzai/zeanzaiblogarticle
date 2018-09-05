@@ -6,4 +6,4 @@ categories: ["test"]
 ---
 > 这是一篇测试。
 
-- [安装GitLab](http://localhost:1313/post/test/install-gitlab)
+- [安装GitLab](http://zeanzai.github.io/post/test/install-gitlab)
