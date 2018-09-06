@@ -8,324 +8,39 @@ categories:
 tags: ["hugo"]
 ---
 
-> 笔者在进行试验时，有以下几个操作习惯，具体[参考](https://github.com/zeanzai/Computer-Science-Study-Note/blob/master/operation/README.md)。
-> Centos7默认开通了80端口和22端口。
+## 整个开发流程
 
-## 安装golang
+在此, 笔者定义了一个完整的开发流程, 使得在不同的平台上面都能完成只需要发布文章然后提交到 GitHub 就能够自动化部署的目标.
 
-1. 安装过程如下：
+笔者将以不同场景的操作方式来讲述这个过程.
 
-```shell
-# 1. 进入安装包存放位置
-[root@iZwz97ekphk0kmqgt9zvc4Z ~]# cd /opt/packages/
+1. 公司
+  在公司的电脑上, 安装好hugo, 然后在特定目录下面生成博客的根目录, 然后使用
 
-# 2. 下载
-[root@iZwz97ekphk0kmqgt9zvc4Z packages]# wget -c https://studygolang.com/dl/golang/go1.11.linux-amd64.tar.gz
---2018-09-04 18:14:18--  https://studygolang.com/dl/golang/go1.11.linux-amd64.tar.gz
-Resolving studygolang.com (studygolang.com)... 59.110.219.94
-Connecting to studygolang.com (studygolang.com)|59.110.219.94|:443... connected.
-HTTP request sent, awaiting response... 303 See Other
-Location: https://dl.google.com/go/go1.11.linux-amd64.tar.gz [following]
---2018-09-04 18:14:19--  https://dl.google.com/go/go1.11.linux-amd64.tar.gz
-Resolving dl.google.com (dl.google.com)... 203.208.40.35, 203.208.40.39, 203.208.40.40, ...
-Connecting to dl.google.com (dl.google.com)|203.208.40.35|:443... connected.
-HTTP request sent, awaiting response... 200 OK
-Length: 127163815 (121M) [application/octet-stream]
-Saving to: ‘go1.11.linux-amd64.tar.gz’
 
-100%[=======================================================================>] 127,163,815 11.9MB/s   in 10s
+该步骤为关键步骤, 主要分为`分解文档结构`, `上传文档到各自仓库`, `克隆项目到服务器`, `创建webhook命令`, `在GitHub上面配置webhook`, `测试`几个步骤.
 
-2018-09-04 18:14:29 (11.6 MB/s) - ‘go1.11.linux-amd64.tar.gz’ saved [127163815/127163815]
 
-[root@iZwz97ekphk0kmqgt9zvc4Z packages]# ll
-total 124188
--rw-r--r-- 1 root root 127163815 Aug 25 06:10 go1.11.linux-amd64.tar.gz
+#### 分解文档结构
 
-# 3. 创建安装目录
-[root@iZwz97ekphk0kmqgt9zvc4Z packages]# mkdir /usr/setup
-
-# 4. 解压到安装目录
-[root@iZwz97ekphk0kmqgt9zvc4Z packages]# tar zxf go1.11.linux-amd64.tar.gz -C /usr/setup/
-[root@iZwz97ekphk0kmqgt9zvc4Z packages]# cd /usr/setup/
-[root@iZwz97ekphk0kmqgt9zvc4Z setup]# ll
-total 4
-drwxr-xr-x 10 root root 4096 Aug 25 04:41 go
-
-# 5. 创建gopath目录结构
-[root@iZwz97ekphk0kmqgt9zvc4Z setup]# mkdir go/gopath/
-[root@iZwz97ekphk0kmqgt9zvc4Z setup]# mkdir go/gopath/bin
-[root@iZwz97ekphk0kmqgt9zvc4Z setup]# mkdir go/gopath/src
-[root@iZwz97ekphk0kmqgt9zvc4Z setup]# mkdir go/gopath/pkg
-
-# 6. 配置环境变量
-[root@iZwz97ekphk0kmqgt9zvc4Z setup]# vi /etc/profile
-# 添加以下内容
-export GOROOT=/usr/setup/go
-export GOPATH=/usr/setup/go/gopath
-export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
-
-# 7. 使配置文件生效
-[root@iZwz97ekphk0kmqgt9zvc4Z setup]# source /etc/profile
-
-# 8. 测试
-[root@iZwz97ekphk0kmqgt9zvc4Z setup]# go version
-go version go1.11 linux/amd64
+将hugo初始化的根目录分解, 分解成四个目录, 这样分解的目的是为了区分不同仓库的功能, 也是为了更好的维护.
 
 ```
-
-2. 参考网址
-> https://www.cnblogs.com/chy123/p/6750347.html
-> https://studygolang.com/dl
-> https://blog.csdn.net/shida_csdn/article/details/79441694
-
----
-
-## 安装git
-```shell
-# 1. 查看是否已经安装
-[root@iZwz97ekphk0kmqgt9zvc4Z ~]# git --version
-
-# 2. 安装依赖包
-[root@iZwz97ekphk0kmqgt9zvc4Z ~]# yum install -y curl-devel expat-devel gettext-devel openssl-devel zlib-devel gcc perl-ExtUtils-MakeMaker
-
-# 3. 进入安装包存放目录
-[root@iZwz97ekphk0kmqgt9zvc4Z ~]# cd /opt/packages/
-
-# 4. 下载
-[root@iZwz97ekphk0kmqgt9zvc4Z packages]# wget -c https://github.com/git/git/archive/v2.18.0.tar.gz
-
-# 5. 解压到当前目录
-[root@iZwz97ekphk0kmqgt9zvc4Z packages]# tar zxf v2.18.0.tar.gz
-
-# 6. 创建安装目录
-[root@iZwz97ekphk0kmqgt9zvc4Z packages]# mkdir /usr/setup/git_2.18.0
-
-# 7. 进入源码目录，并进行make配置
-[root@iZwz97ekphk0kmqgt9zvc4Z packages]# cd git-2.18.0/
-[root@iZwz97ekphk0kmqgt9zvc4Z packages]# make prefix=/usr/setup/git_2.18.0 all
-[root@iZwz97ekphk0kmqgt9zvc4Z packages]# make prefix=/usr/setup/git_2.18.0 install
-
-# 8. 配置环境变量，并使配置生效
-[root@iZwz97ekphk0kmqgt9zvc4Z packages]# vi /etc/profile
-# 添加以下内容
-export GIT_HOME=/usr/setup/git_2.18.0
-export PATH=$PATH:$GIT_HOME/bin
-[root@iZwz97ekphk0kmqgt9zvc4Z packages]# source /etc/profile
-
-# 9. 测试
-[root@iZwz97ekphk0kmqgt9zvc4Z packages]# git --version
-
-# 10. 配置git全局用户名和邮箱
-[root@iZwz97ekphk0kmqgt9zvc4Z packages]# git config --global user.name "zeanzai"
-[root@iZwz97ekphk0kmqgt9zvc4Z packages]# git config --global user.email "438123371@qq.com"
-```
-
----
-
-## 安装hugo
-安装过程分为两种，一种是使用yum安装，一种是使用安装包形式安装。
-
-#### 安装包安装方式
-
-1. 查看安装包下载地址： https://github.com/gohugoio/hugo/releases/
-2. 选取最新版本，并复制下载地址
-3. 安装
-```shell
-# 1. 进入安装包存放目录
-[root@izwz97ekphk0kmqgt9zvc4z ~]# cd opt/packages/
-
-# 2. 下载安装包
-[root@izwz97ekphk0kmqgt9zvc4z packages]# wget -c https://github.com/gohugoio/hugo/releases/download/v0.48/hugo_0.48_Linux-64bit.tar.gz
-
-# 3. 解压
-[root@izwz97ekphk0kmqgt9zvc4z packages]# tar zxf hugo_0.48_Linux-64bit.tar.gz
-
-# 4. 移动
-[root@izwz97ekphk0kmqgt9zvc4z packages]# mv /usr/setup/hugo/hugo /usr/local/bin/
-
-# 5. 测试
-[root@izwz97ekphk0kmqgt9zvc4z packages]# hugo version
-Hugo Static Site Generator v0.48 linux/amd64 BuildDate: 2018-08-29T06:33:51Z
-```
-4. 参考
-> https://www.jianshu.com/p/bb2d483f4caf
-
-#### yum安装方式（建议）
-1. 根据hugo官方[文档](https://gohugo.io/getting-started/installing/)提示，找到[Epel Repo](https://copr.fedorainfracloud.org/coprs/daftaupe/hugo/)下载地址，获取hugo的Epel Repo里面的[内容](https://copr.fedorainfracloud.org/coprs/daftaupe/hugo/repo/epel-7/daftaupe-hugo-epel-7.repo)
-2. 安装
-```shell
-# 1. 将第一步获取到的内容复制到hugo.repo文件中
-[root@study ~]# vi /etc/yum.repos.d/hugo.repo
-
-# 2. 使用yum进行安装
-[root@study ~]# yum -y install hugo
-
-# 3. 测试
-[root@study ~]# hugo version
-Hugo Static Site Generator v0.48 linux/amd64 BuildDate: 2018-08-29T09:42:25Z
-```
-
----
-
-## 安装webhook
-webhook可以理解成可以通过远程调用来执行的相关命令的工具。举个例子来说明：
-> 需求分析
->   远程调用一个命令后，服务器打印当前服务器的时间到/opt/scripts/hugo-deploy/redeploy.log
-
-
-```shell
-# 1. 安装webhook客户端
-[root@izwz97ekphk0kmqgt9zvc4z ~]# go get github.com/adnanh/webhook
-# 这一步需要安装golang，执行webhook安装过程后，webhook的相关文件就在安装golang时配置的gopath目录下面
-
-# 2. 创建可执行的文件
-[root@izwz97ekphk0kmqgt9zvc4z ~]# mkdir -p /opt/scripts/hugo-deploy
-[root@izwz97ekphk0kmqgt9zvc4z ~]# vi /opt/scripts/hugo-deploy/redeploy.sh
-  #!/bin/bash
-
-  time=`date "+%Y-%m-%d %H:%M:%S"`
-  echo "${time}" >> /opt/scripts/hugo-deploy/redeploy.log
-[root@izwz97ekphk0kmqgt9zvc4z ~]# chmod +x /opt/scripts/hugo-deploy/redeploy.sh
-
-# 3. 测试是否能够打印
-[root@izwz97ekphk0kmqgt9zvc4z ~]# /opt/scripts/hugo-deploy/redeploy.sh
-[root@izwz97ekphk0kmqgt9zvc4z ~]# cat /opt/scripts/hugo-deploy/redeploy.log
-
-# 4. 创建hooks.json文件
-[root@izwz97ekphk0kmqgt9zvc4z ~]# vi /opt/scripts/hugo-deploy/hooks.json
-  [
-    {
-      "id": "redeploy-webhook",
-      "execute-command": "/opt/scripts/hugo-deploy/redeploy.sh",
-      "command-working-directory": "./"
-    }
-  ]
-
-# 5. 启动webhook客户端
-[root@izwz97ekphk0kmqgt9zvc4z ~]# /usr/setup/go/gopath/bin/webhook -hooks /opt/scripts/hugo-deploy/hooks.json -port=9876 -verbose
-
-# 6. 开放9876端口，并测试
-在阿里云安全组上放开9876端口，然后在浏览器中输入：http://<your-ip>:9876/hooks/redeploy-webhook
-打印log文件
-
-# 7. 创建服务
-[root@izwz97ekphk0kmqgt9zvc4z ~]# cd /etc/systemd/system
-[root@izwz97ekphk0kmqgt9zvc4z system]# vi webhook.service
-  [Unit]
-  Description=Webhooks
-
-  [Service]
-  ExecStart=/usr/setup/go/gopath/bin/webhook -hooks /opt/scripts/hugo-deploy/hooks.json -port=9876 -hotreload
-
-  [Install]
-  WantedBy=multi-user.target
-[root@izwz97ekphk0kmqgt9zvc4z system]# systemctl enable webhook.service
-[root@izwz97ekphk0kmqgt9zvc4z system]# systemctl start webhook.service
-
-# 8. 测试
-
-```
-参考
-> https://davidauthier.wearemd.com/blog/deploy-using-github-webhooks.html
-
----
-
-## 安装Nginx
-
-```shell
-# 1. 创建安装目录
-[root@izwz97ekphk0kmqgt9zvc4z ~]# mkdir /usr/setup/nginx_1.12.2
-[root@izwz97ekphk0kmqgt9zvc4z ~]# mkdir /usr/setup/nginx_1.12.2/temp
-
-# 2. 安装依赖
-[root@izwz97ekphk0kmqgt9zvc4z ~]# yum install -y gcc-c++ pcre pcre-devel zlib zlib-devel openssl openssl-devel
-
-# 3. 下载安装包并上传到/opt/package
-
-# 4. 解压
-[root@izwz97ekphk0kmqgt9zvc4z ~]# cd /opt/packages/
-[root@izwz97ekphk0kmqgt9zvc4z packages]# tar zxf nginx-1.12.2.tar.gz
-[root@izwz97ekphk0kmqgt9zvc4z packages]# cd nginx-1.12.2/
-
-# 5. 配置
-[root@izwz97ekphk0kmqgt9zvc4z nginx-1.12.2]# ./configure --prefix=/usr/setup/nginx_1.12.2 \
-> --pid-path=/usr/setup/nginx_1.12.2/nginx.pid \
-> --lock-path=/usr/setup/nginx_1.12.2/lock/nginx.lock \
-> --error-log-path=/usr/setup/nginx_1.12.2/log/error.log \
-> --http-log-path=/usr/setup/nginx_1.12.2/log/access.log \
-> --http-client-body-temp-path=/usr/setup/nginx_1.12.2/temp/client \
-> --http-proxy-temp-path=/usr/setup/nginx_1.12.2/temp/proxy \
-> --http-fastcgi-temp-path=/usr/setup/nginx_1.12.2/temp/fastcgi \
-> --http-uwsgi-temp-path=/usr/setup/nginx_1.12.2/temp/uwsgi \
-> --http-scgi-temp-path=/usr/setup/nginx_1.12.2/temp/scgi \
-> --with-http_stub_status_module \
-> --with-http_gzip_static_module \
-> --with-http_ssl_module
-
-[root@izwz97ekphk0kmqgt9zvc4z nginx-1.12.2]# make
-[root@izwz97ekphk0kmqgt9zvc4z nginx-1.12.2]# make install
-
-# 6. 开放80端口，并进行测试
-[root@izwz97ekphk0kmqgt9zvc4z nginx_1.12.2]# /usr/setup/nginx_1.12.2/sbin/nginx
-
-# 7. 配置服务文件
-[root@izwz97ekphk0kmqgt9zvc4z nginx_1.12.2]# cd /etc/systemd/system
-[root@izwz97ekphk0kmqgt9zvc4z system]# vi nginx.service
-  [Unit]
-  Description=nginx
-  After=network.target
-
-  [Service]
-  Type=forking
-  ExecStart=/usr/setup/nginx_1.12.2/sbin/nginx
-  ExecReload=/usr/setup/nginx_1.12.2/sbin/nginx -s reload
-  ExecStop=/usr/setup/nginx_1.12.2/sbin/nginx -s quit
-  PrivateTmp=true
-
-  [Install]
-  WantedBy=multi-user.target
-
-[root@izwz97ekphk0kmqgt9zvc4z system]# systemctl enable nginx.service
-[root@izwz97ekphk0kmqgt9zvc4z system]# systemctl start nginx.service
-
-# 8. 启动Nginx，并进行测试
-
-```
-**扩展**：
-1. 启动和关闭
-```shell
-// 切换到Nginx安装目录
-$ cd /usr/setup/nginx_1.12.2/sbin
-
-// 启动 （也可以加上 -C /usr/setup/nginx_1.12.2/config/nginx.conf 配置文件）
-$ ./nginx
-
-// 关闭
-第一种方式 查找相关进程，然后kill进程
-第二种方式 ./nginx -s stop
-第三种方式 ./nginx -s quit
-```
-
-
-2. 关于centos7的系统服务命令
-
-```shell
-$ systemctl start nginx.service
-$ systemctl enable nginx.service
-$ systemctl disable nginx.service
-$ systemctl status nginx.service
-$ systemctl restart nginx.service
-```
-
----
-## 部署
-
-1. 文件结构详解
 hugo
   |- <username>.github.io
   |- <username>blogarticle
+  |- <username>blogtheme
   |- <username>blogbase
-  |- <username>blogbase
+```
+
+讲解:
+- `<username>.github.io` 为使用GitHubPage所创建的项目, 保存的是执行 hugo 命令后生成的静态文件, 相当于根目录中的 public 文件夹.
+- `<username>blogarticle` 文章目录, 保存的是所有的 md 文档, 相当于根目录中的 content 文件夹.
+- `<username>blogtheme` 主题目录, 保存的是自定义的主题, 相当于根目录中的 theme 文件夹.
+- `<username>blogbase` 其他目录, 保存的是除上面三个目录外的其他目录.
+
+将文档分解完成后,
+
 
 2. 在开发用的机子上面创建以上文件夹，并完成hugo的配置，然后将文件上传到github上面，总共是四个仓库。
 3. 生成服务器的秘钥
