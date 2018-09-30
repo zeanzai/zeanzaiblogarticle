@@ -2,17 +2,19 @@
 title: Basic HTML Elements
 description: Example test article that contains basic HTML elements for text formatting on the Web.
 date: 2018-04-16
+thumbnail: "img/domain.jpg"
 categories:
   - "Development"
 tags:
   - "HTML"
   - "CSS"
   - "Basic Elements"
+---
+
 menu:
   main:
     name: Jekyll migration
     weight: 10
----
 
 The main purpose of this article is to make sure that all basic HTML Elements are decorated with CSS so as to not miss any possible elements when creating new themes for Hugo.
 <!--more-->

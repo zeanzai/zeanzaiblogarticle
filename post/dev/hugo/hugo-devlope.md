@@ -1,11 +1,12 @@
 ---
-title: "使用hugo创建自己的博客"
-date: 2018-09-06T09:12:55+08:00
-description: "hugo开发"
-thumbnail: "img/domain.jpg"
+title: "使用hugo创建自己的博客：（一）总述"
+date: 2018-09-06T10:12:55+08:00
+description: "使用hugo创建自己的博客"
+thumbnail: "img/dev/blog.jfif"
 categories:
   - "dev"
-tags: ["hugo"]
+tags:
+  - "hugo"
 ---
 
 ## 整个开发流程
@@ -36,21 +37,28 @@ hugo
   |- <username>blogbase
 ```
 
-讲解:
+文档讲解:
+
 - `<username>.github.io` 为使用GitHubPage所创建的项目, 保存的是执行 hugo 命令后生成的静态文件, 相当于根目录中的 public 文件夹.
 - `<username>blogarticle` 文章目录, 保存的是所有的 md 文档, 相当于根目录中的 content 文件夹.
 - `<username>blogtheme` 主题目录, 保存的是自定义的主题, 相当于根目录中的 theme 文件夹.
 - `<username>blogbase` 其他目录, 保存的是除上面三个目录外的其他目录.
 
+---
+
 #### 上传文档到各自仓库
 在开发用的机子上面创建以上文件夹，并完成hugo的配置，然后将文件上传到github上面，总共是四个仓库。
+
+---
 
 #### 配置服务器
 需要安装一下软件:
 
-1. [安装Nginx](/post/dev/install-nginx)
-2. [安装Webhook](/post/dev/install-webhook)
-3. [安装hugo](/post/dev/install-hugo)
+1. <a href="/post/dev/install-nginx" target="_blank">安装Nginx</a>
+2. <a href="/post/dev/install-webhook" target="_blank">安装Webhook</a>
+3. <a href="/post/dev/install-hugo" target="_blank">安装hugo</a>
+
+---
 
 #### 克隆项目到服务器
 1. 生成服务器的秘钥
@@ -76,9 +84,15 @@ hugo
 [root@izwz97ekphk0kmqgt9zvc4z hugoblog]# git clone https://github.com/zeanzai/zeanzaiblogarticle.git
 ```
 
+---
+
 #### 创建webhook命令
 
+---
+
 #### 在GitHub上面配置webhook
+
+---
 
 #### 测试
 
@@ -151,6 +165,8 @@ echo "" >> /opt/scripts/hugo-deploy/redeploy.log
 8. 在article的GitHub仓库中配置GitHub钩子
 9. 完成
 
+---
+
 参考：
 
 > https://gohugo.io/hosting-and-deployment/hosting-on-github/#github-project-pages
@@ -164,4 +180,8 @@ echo "" >> /opt/scripts/hugo-deploy/redeploy.log
 > https://davidauthier.wearemd.com/blog/deploy-using-github-webhooks.html
 >
 > https://blog.csdn.net/toyijiu/article/details/73611874
-> https://git-scm.com/book/zh/v1/Git-%E5%9F%BA%E7%A1%80-%E8%AE%B0%E5%BD%95%E6%AF%8F%E6%AC%A1%E6%9B%B4%E6%96%B0%E5%88%B0%E4%BB%93%E5%BA%93
+>  https://git-scm.com/book/zh/v1/Git-%E5%9F%BA%E7%A1%80-%E8%AE%B0%E5%BD%95%E6%AF%8F%E6%AC%A1%E6%9B%B4%E6%96%B0%E5%88%B0%E4%BB%93%E5%BA%93
+
+关于此主题的其他文章：
+
+- <a href="/tags/hugo/" target="_blank">在此</a>

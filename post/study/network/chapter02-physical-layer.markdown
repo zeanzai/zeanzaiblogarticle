@@ -1,10 +1,12 @@
 ---
 title: "第二章 物理层"
-date: 2018-09-03T17:35:34+08:00
-description: "概述"
-thumbnail: "img/tn.png"
+date: 2018-09-03T11:32:34+08:00
+description: "计算机网络阅读笔记"
+keywords: "计算机 | 网络 | 读书 | 笔记"
 categories:
   - "network"
+tags:
+  - "notes"
 ---
 本章重点内容：
 
@@ -104,13 +106,13 @@ categories:
       - 长距离传输需要中继器（对数字信号进行整形）和放大器（对模拟信号进行放大）
       - 根据是否在双绞线的外面加上一层金属丝编织的屏蔽层，把双绞线分为屏蔽双绞线（STP，shielded twisted pair）和无屏蔽双绞线（UTP，unshielded twisted pair）
       - 绞合度（单位长度内的绞合次数）越高，双绞线的质量越好
-      - ![](/img/network/2-1.png)
+      - ![](/img/study/network/2-1.png)
     - 同轴电缆
 
       - 抗干扰特性好，传输较高速率数据
       - 主要用在有线电视网的居民小区中
       - 结构如下图
-    ![](/img/network/2-5.png)
+    ![](/img/study/network/2-5.png)
 
     - 光缆
 
@@ -158,7 +160,7 @@ categories:
     - 红外通信，近距离传输
     - 激光通信，近距离传输
 
-![](/img/network/2-12.png)
+![](/img/study/network/2-12.png)
 
 ## 2.4 信道复用技术
 
@@ -234,7 +236,7 @@ categories:
   - 模型
 
   HFC网把原有线电视网中的同轴电缆主干部分换成光纤，光纤从头端连接到光纤结点。在光纤结点处光信号转化为电信号，然后通过同轴电缆传输到用户家中。
-  ![](/img/network/2-23.png)
+  ![](/img/study/network/2-23.png)
 
   - 特点
 
@@ -246,7 +248,7 @@ categories:
 
   - 频带划分
 
-    ![](/img/network/2-24.png)
+    ![](/img/study/network/2-24.png)
 
   - 设备
 
@@ -272,7 +274,7 @@ categories:
 
     光纤干线和广大用户之间则使用一段中间转换装置（光配线网ODN，optical distribution network），使得数十个家庭用户能够共享一根光纤干线。常用的是无源光网络PON（passive optical network）。
 
-    ![](/img/network/2-25.png)
+    ![](/img/study/network/2-25.png)
 
     无源光网络PON种类很多，当下最流行的有两种：
 
@@ -286,3 +288,9 @@ categories:
       - 接受由1：N光分路器（splitter）发来的数据；
     - 1：N光分路器（splitter）：下行数据时使用广播的形式传递数据给ONU，上行数据时将ONU传过来的数据进行汇总，并使用TDMA（时分多址）方式发往OLT，典型的是1:32
     - ONU（optical network unit）：光网络单元。具有特有的标识，只接受发送给自己的数据。负责在上行数据时将电信号转化为光信号，下行数据时将光信号转化为电信号。
+
+
+---
+
+- <a href="/categories/network/" target="_blank">此文章的其他相关文章</a>
+- <a href="/tags/notes/" target="_blank">我的其他读书笔记</a>

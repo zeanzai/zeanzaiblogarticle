@@ -1,6 +1,6 @@
 ---
 title: "安装Hugo"
-date: 2018-09-06T18:25:30+08:00
+date: 2015-09-06T18:25:30+08:00
 description: "hugo开发"
 thumbnail: "img/dev/hugo.png"
 categories:

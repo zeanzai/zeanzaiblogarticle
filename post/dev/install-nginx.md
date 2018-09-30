@@ -1,11 +1,12 @@
 ---
-title: "安装Nginx"
-date: 2018-09-06T18:28:25+08:00
-description: "hugo开发"
+title: "使用hugo创建自己的博客：（二）安装Nginx"
+date: 2018-09-06T11:28:25+08:00
+description: "使用hugo创建自己的博客"
 thumbnail: "img/dev/nginx.jpg"
 categories:
   - "dev"
-tags: ["hugo"]
+tags:
+  - "hugo"
 ---
 
 ## 前言

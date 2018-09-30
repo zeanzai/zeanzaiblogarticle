@@ -1,10 +1,12 @@
 ---
 title: "第三章 数据链路层"
-date: 2018-09-04T10:06:34+08:00
-description: "概述"
-thumbnail: "img/tn.png"
+date: 2018-09-03T12:32:34+08:00
+description: "计算机网络阅读笔记"
+keywords: "计算机 | 网络 | 读书 | 笔记"
 categories:
   - "network"
+tags:
+  - "notes"
 ---
 
 本章重点内容：
@@ -45,7 +47,7 @@ categories:
 
     链路层协议规定了所能传输的帧的数据部分长度上限就是**最大传输数据单元**
 
-    ![](https://github.com/zeanzai/Computer-Science-Study-Note/blob/master/computer-network/image/3-4.png)
+    ![](/img/study/network/3-4.png)
 
   - 帧界定符
 
@@ -76,7 +78,7 @@ categories:
 
       使用包含许多必要的控制信息组成的首部（ASCII码中的SOH——start of header，十六进制编码：01，二进制编码：0000 0001）和尾部（ASCII码中的EOT——end of transmission，十六进制编码：04，二进制编码：0000 0100）将由网络层传来的IP数据报进行包裹，组成帧。
 
-      ![](https://github.com/zeanzai/Computer-Science-Study-Note/blob/master/computer-network/image/3-5.png)
+      ![](/img/study/network/3-5.png)
 
   - 透明传输
 
@@ -84,7 +86,7 @@ categories:
 
       发送端的数据链路层在数据中如果出现控制字符，就在控制字符前面插入转义字符“ESC”（十六进制编码1B）
 
-      ![](https://github.com/zeanzai/Computer-Science-Study-Note/blob/master/computer-network/image/3-7.png)
+      ![](/img/study/network/3-7.png)
 
   - 差错检测
 
@@ -101,7 +103,7 @@ categories:
       5. 接收端将接收到的比特流进行CRC运算，得到余数R2
       6. 判断R2是否等于0，如果等于0，就判定该帧没有出错，就执行接受操作；如果R2不等于0，就执行丢弃操作
 
-      ![](https://github.com/zeanzai/Computer-Science-Study-Note/blob/master/computer-network/image/3-8.png)
+      ![](/img/study/network/3-8.png)
 
     - 模2运算
 
@@ -142,7 +144,7 @@ categories:
 
   - 各字段的意义
 
-    ![](https://github.com/zeanzai/Computer-Science-Study-Note/blob/master/computer-network/image/3-10.png)
+    ![](/img/study/network/3-10.png)
 
     注意：FAC等字母都是代表字段名称，7E等都是十六进制数值。
 
@@ -158,6 +160,12 @@ categories:
 
 - PPP协议的工作状态
 
-  ![](https://github.com/zeanzai/Computer-Science-Study-Note/blob/master/computer-network/image/3-12.png)
+  ![](/img/study/network/3-12.png)
 
 ## 3.3 使用广播信道的数据链路层
+
+
+---
+
+- <a href="/categories/network/" target="_blank">此文章的其他相关文章</a>
+- <a href="/tags/notes/" target="_blank">我的其他读书笔记</a>

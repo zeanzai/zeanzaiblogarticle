@@ -1,7 +1,7 @@
 ---
-title: "安装Webhook"
-date: 2018-09-06T18:27:14+08:00
-description: "hugo开发"
+title: "使用hugo创建自己的博客：（三）安装Webhook"
+date: 2018-09-06T12:27:14+08:00
+description: "使用hugo创建自己的博客"
 thumbnail: "img/dev/webhook.jpg"
 categories:
   - "dev"

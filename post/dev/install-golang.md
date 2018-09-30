@@ -1,6 +1,6 @@
 ---
 title: "安装golang"
-date: 2018-09-06T18:12:55+08:00
+date: 2011-09-06T18:12:55+08:00
 description: "hugo开发"
 thumbnail: "img/dev/golang.jpg"
 categories:
