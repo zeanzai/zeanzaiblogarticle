@@ -1,12 +1,14 @@
 ---
-title: "使用hugo创建自己的博客：（三）安装Webhook"
-date: 2018-09-06T12:27:14+08:00
-description: "使用hugo创建自己的博客"
-thumbnail: "img/dev/webhook.jpg"
+title: "安装Webhook"
+date: 2018-10-01T12:27:14+08:00
+description: "在CentOS7上安装Webhook"
+keywords: "webhook | centos | centos7 | install"
+thumbnail: "img/dev/install/webhook.jpg"
 categories:
-  - "dev"
+  - "install"
 tags:
-  - "hugo"
+  - "DevOps"
+  - "Webhook"
 ---
 
 ## 前言

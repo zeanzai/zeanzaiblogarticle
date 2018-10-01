@@ -1,7 +1,7 @@
 ---
 title: "About Me"
 date: 2018-08-25T17:09:06+08:00
-thumbnail: "img/domain.jpg"
+thumbnail: "img/about/about.png"
 ---
 
 #### 关于我
@@ -23,8 +23,3 @@ thumbnail: "img/domain.jpg"
 我是一个一点都不安分的90后，也常常想：生活应该怎么过？人生应该朝哪个方向前进？
 
 常出没于<a href="https://zeanzai.me" target="_blank">博客</a>、<a href="https://weibo.com/zeanzai" target="_blank">微博</a>、<a href="https://www.zhihu.com/people/zeanzai/" target="_blank">知乎</a>、<a href="https://github.com/zeanzai" target="_blank">GitHub</a>。
-
----
-
-#### 关于此博客
-fasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasd

@@ -1,11 +1,12 @@
 ---
 title: "Mybatis中Foreach的用法"
-date: 2018-08-31T11:05:33+08:00
-description: ""
-thumbnail: "img/tn.png"
+date: 2018-10-01T15:05:33+08:00
+description: "Mybatis中Foreach的用法"
+keywords: "Mybatis | Foreach | uses"
 categories:
-  - "Mybatis"
+  - "Dev"
 tags:
+  - "Mybatis"
   - "foreach"
 ---
 

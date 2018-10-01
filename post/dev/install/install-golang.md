@@ -1,11 +1,13 @@
 ---
-title: "安装golang"
-date: 2011-09-06T18:12:55+08:00
-description: "hugo开发"
-thumbnail: "img/dev/golang.jpg"
+title: "安装Golang"
+date: 2018-10-01T14:12:55+08:00
+description: "在CentOS7上面安装golang"
+thumbnail: "img/dev/install/golang.jpg"
 categories:
-  - "dev"
-tags: ["hugo"]
+  - "install"
+tags:
+  - "DevOps"
+  - "GoLang"
 ---
 
 ## 前言

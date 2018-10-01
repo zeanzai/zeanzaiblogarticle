@@ -1,12 +1,13 @@
 ---
 title: "第二章 物理层"
-date: 2018-09-03T11:32:34+08:00
+date: 2018-10-01T10:19:40+08:00
 description: "计算机网络阅读笔记"
 keywords: "计算机 | 网络 | 读书 | 笔记"
 categories:
   - "network"
 tags:
   - "notes"
+  - "network"
 ---
 本章重点内容：
 

@@ -1,8 +1,14 @@
 ---
 title: "安装GitLab"
-date: 2018-08-25T17:23:45+08:00
-tags: ["install"]
-categories: ["DevOps"]
+date: 2018-10-01T13:23:45+08:00
+description: "在CentOS7上安装GitLab"
+keywords: "GitLab | centos | centos7 | install"
+thumbnail: "img/dev/install/gitlab.png"
+categories:
+  - "install"
+tags:
+  - "DevOps"
+  - "GitLab"
 ---
 
 # 更新yum源
@@ -143,5 +149,3 @@ success
 3. https://www.gitlab.com.cn/installation/#centos-7
 4. https://github.com/judasn/Linux-Tutorial/blob/master/markdown-file/Gitlab-Install-And-Settings.md
 ```
-
-<a href="http://localhost:1313/post/test">返回主页</a>

@@ -1,13 +1,13 @@
 ---
 title: "java中的字符串操作"
-date: 2018-08-31T10:54:45+08:00
+date: 2018-10-01T15:54:45+08:00
 description: "java中的字符串操作"
-thumbnail: "img/tn.png"
+keywords: "java | String | split"
 categories:
-  - "Java"
-  - "String"
+  - "Dev"
 tags:
   - "Java"
+  - "String"
 ---
 
 > 在java.lang包中有String.split()方法，返回是一个数组，但是有很多坑。

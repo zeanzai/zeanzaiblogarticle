@@ -1,22 +1,21 @@
 ---
-title: "使用hugo创建自己的博客：（四）安装Git"
-date: 2016-09-06T18:24:05+08:00
-description: "使用hugo创建自己的博客"
-thumbnail: "img/dev/git.jpg"
+title: "安装Git"
+date: 2018-10-01T11:24:05+08:00
+description: "在CentOS7上安装git"
+keywords: "git | centos | centos7 | install"
+thumbnail: "img/dev/install/git.jpg"
 categories:
-  - "dev"
+  - "install"
 tags:
-  - "hugo"
+  - "DevOps"
+  - "Git"
 ---
-
-
 
 ## 前言
 
 > 笔者在进行试验时，有几个操作习惯，具体[在这里](https://github.com/zeanzai/Computer-Science-Study-Note/blob/master/operation/README.md)。<br>
 > 此外，Centos7默认开通了80端口和22端口。<br>
 > 云服务器上面不需要执行开通端口的命令，直接在管理界面中添加安全组即可。
-
 
 ## 安装git
 

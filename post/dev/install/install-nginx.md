@@ -1,12 +1,14 @@
 ---
-title: "使用hugo创建自己的博客：（二）安装Nginx"
-date: 2018-09-06T11:28:25+08:00
-description: "使用hugo创建自己的博客"
-thumbnail: "img/dev/nginx.jpg"
+title: "安装Nginx"
+date: 2018-10-01T11:28:25+08:00
+description: "在CentOS7上安装Nginx"
+keywords: "nginx | centos | centos7 | install"
+thumbnail: "img/dev/install/nginx.jpg"
 categories:
-  - "dev"
+  - "install"
 tags:
-  - "hugo"
+  - "DevOps"
+  - "Nginx"
 ---
 
 ## 前言

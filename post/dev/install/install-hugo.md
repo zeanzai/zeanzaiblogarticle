@@ -1,12 +1,14 @@
 ---
 title: "安装Hugo"
-date: 2015-09-06T18:25:30+08:00
-description: "hugo开发"
-thumbnail: "img/dev/hugo.png"
+date: 2018-10-01T13:25:30+08:00
+description: "在centos7上面安装hugo"
+keywords: "hugo | centos | centos7 | install"
+thumbnail: "img/dev/install/hugo.png"
 categories:
-  - "dev"
+  - "install"
 tags:
-  - "hugo"
+  - "DevOps"
+  - "Hugo"
 ---
 
 ## 前言
