@@ -54,6 +54,7 @@ Nexus 专业版是需要付费的.
 - hosted，本地仓库，通常我们会部署自己的构件到这一类型的仓库。比如公司的第二方库。
 - proxy，代理仓库，它们被用来代理远程的公共仓库，如maven中央仓库。
 - group，仓库组，用来合并多个hosted/proxy仓库，当你的项目希望在多个repository使用资源时就不需要多次引用了，只需要引用一个group即可。
+- virtual：虚拟仓库
 
 <img src="/img/dev/install/nexus-repo-type.png">
 <img src="/img/dev/install/nexus-group.png">
@@ -64,14 +65,20 @@ Nexus 专业版是需要付费的.
 - Releases:<br />
 这里存放我们自己项目中发布的构建, 通常是Release版本的, 比如我们自己做了一个FTP Server的项目, 生成的构件为ftpserver.war, 我们就可以把这个构建发布到Nexus的Releases本地仓库. 关于符合发布后面会有介绍.
 - Snapshots:<br />
-这个仓库非常的有用, 它的目的是让我们可以发布那些非release版本, 非稳定版本, 比如我们在trunk下开发一个项目,在正式release之前你可能需要临时发布一个版本给你的同伴使用, 因为你的同伴正在依赖你的模块开发, 那么这个时候我们就可以发布Snapshot版本到这个仓库, 你的同伴就可以通过简单的命令来获取和使用这个临时版本.
+这个仓库非常的有用, 它的目的是让我们可以发布那些非release版本, 非稳定版本, 比如我们在trunk下开发一个项目,在正式release之前你可能需要临时发布一个版本给你的同伴使用, 因为你的同伴正在依赖你的模块开发, 那么这个时候我们就可以发布Snapshot版本到这个仓库, 你的同伴就可以通过简单的命令来获取和使用这个临时版本.**用来部署管理内部的快照版本构件的宿主类型仓库**
 - 3rd Party:<br />
 顾名思义, 第三方库, 你可能会问不是有中央仓库来管理第三方库嘛,没错, 这里的是指可以让你添加自己的第三方库, 比如有些构件在中央仓库是不存在的. 比如你在中央仓库找不到Oracle 的JDBC驱动, 这个时候我们就需要自己添加到3rdparty仓库。
+
+### 3.3 其他仓库
+ Apache Snapshots: 类型为proxy仓库，用了代理ApacheMaven仓库快照版本的构件仓库
+ Central: 类型为proxy仓库，用来代理maven中央仓库中发布版本构件的仓库
+ Central M1 shadow: 类型为virtual仓库，用于提供中央仓库中M1格式的发布版本的构件镜像仓库
 
 ## 4. 使用nexus
 
 ### 4.1 覆盖中央仓库的默认地址
-修改maven中的配置文件setting.xml
+默认的，如果本地仓库找不到依赖的构件，这时本地仓库会先到Nexus上找，如果发现Nexus服务关闭后，才会到中央仓库找。如果我们想覆盖中央仓库的默认地址，强制依赖的东西都到Nexus中去找，即使Nexus关闭也不会到中央工厂去下载，则我们需要修改maven中的配置文件setting.xml：
+
 ```
 <mirror>
   <id>nexusMirror</id>
@@ -82,11 +89,65 @@ Nexus 专业版是需要付费的.
 ```
 
 ### 4.2 配置认证
+大部分公共的远程仓库无须认证即可直接访问，但我们在平时的开发中往往会架设自己的Maven远程仓库，出于安全方面的考虑，我们需要提供认证信息才能访问自己搭建的远程仓库。配置认证信息和配置远程仓库不同，远程仓库可以配置在settings.xml文件中，也可直接在pom.xml中配置，但是认证信息必须配置在settings.xml文件中。在settings.xml中配置认证信息更为安全。如下：
 1. nexus添加用户
+在nexus操作界面中添加用户，并添加`Nexus Deploymeng Role`和`Repo: All Repositories(Full Control)`。
+<img src="/img/dev/install/add-user.png">
 
 2. setting.xml中配置用户
+将上一步配置好的用户信息，编辑到setting.xml配置文件中。
+
+```
+<settings>
+...
+  <!-- 在setting.xml中配置用户认证信息 -->
+  <server>
+  	<id>testRepo</id>
+  	<username>wxy</username>
+  	<password>test</password>
+  </server>
+...
+</settings>
+```
 
 3. setting.xml中配置仓库
+如果是单个项目要使用认证信息，可以直接配置到项目的pom文件中：
+
+```
+<repositories>
+  <repository>
+    <id>testRepo</id>
+    <url>http://127.0.0.1:8081/nexus/content/groups/</url>
+    <releases>
+      <enabled>true</enabled>
+    </releases>
+    <snapshots>
+      <enabled>true</enabled>
+    </snapshots>
+  </repository>
+</repositories>
+```
+
+```
+<profiles>
+...
+  <!-- 配置仓库信息 -->
+  <profile>
+    <id>testRepo</id>
+    <repositories>
+      <repository>
+        <id>local-nexus</id>
+        <name>local-nexus-test</name>
+        <url>http://127.0.0.1:8081/nexus/content/repositories/testRepo/</url>
+        <layout>default</layout>
+        <snapshotPolicy>always</snapshotPolicy>
+      </repository>
+    </repositories>
+  </profile>
+...
+</profiles>
+```
+
 
 ### 4.3 将jar上传到私服
 创建仓库
@@ -100,3 +161,9 @@ Nexus 专业版是需要付费的.
 ## 5. 参考
 
 https://www.cnblogs.com/tyhj-zxp/p/7605879.html
+https://blog.csdn.net/xuke6677/article/details/8482472
+https://blog.csdn.net/zhangdaiscott/article/details/18552537
+https://blog.csdn.net/xuke6677/article/details/8482472
+https://www.jianshu.com/p/12b746bfa44a
+https://www.jianshu.com/u/d82e0c0f48bd
+https://help.sonatype.com/docs
