@@ -5,7 +5,7 @@ keywords: "install Nginx config"
 categories:
   - "Install"
 tags:
-  - "DevOps" 
+  - "DevOps"
 ---
 
 
